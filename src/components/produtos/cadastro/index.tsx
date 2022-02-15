@@ -1,54 +1,75 @@
-import { Layout } from 'components'
+import { useState } from 'react'
+import { Layout, Input } from 'components'
 
 export const CadastroProdutos: React.FC = () => {
+
+    const [ sku, setSku] = useState<string>('')
+    const [ preco, setPreco] = useState<string>('')
+    const [ nome, setNome] = useState<string>('')
+    const [ descricao, setDescricao] = useState<string>('')
+
+    const submit = () => {
+        const produto = {
+            sku, 
+            preco, 
+            nome, 
+            descricao
+        }
+        console.log(produto)
+    }
+
     return(
         <Layout titulo="Produtos">
-            <div className="field">
-                <label className="label" htmlFor="inputSku">SKU: *</label>
-                <div className="control">
-                    <input className="input" 
-                            id="inputSku"
-                            placeholder="digite SKU" />
-                </div>
+            <div className="columns">
+                <Input label = "SKU: *" 
+                    columnClasses = "is-half"
+                    onChange = {setSku} 
+                    value = {sku}
+                    id = "inputSku"
+                    placeholder = "digite SKU"
+                    />
+            
+
+                <Input label = "Preço: *" 
+                    columnClasses = "is-half"
+                    onChange = {setPreco} 
+                    value = {preco}
+                    id = "inputPreco"
+                    placeholder="digite Preço"
+                    />
+            </div>
+            
+            <div className="columns">
+                <Input label = "Nome: *" 
+                    columnClasses = "is-full"
+                    onChange = {setNome} 
+                    value = {nome}
+                    id = "inputNome"
+                    placeholder="digite Nome"
+                />                      
             </div>
 
-            <div className="field">
-                <label className="label" htmlFor="inputPreco">Preço: *</label>
-                <div className="control">
-                    <input className="input" 
-                            id="inputPreco"
-                            placeholder="digite Preço" />
-                </div>
-            </div>
-
-            <div className="field">
-                <label className="label" htmlFor="inputNome">Nome: *</label>
-                <div className="control">
-                    <input className="input" 
-                            id="inputNome"
-                            placeholder="digite Nome Produto" />
-                </div>
-            </div>
-
-            <div className="field">
-                <label className="label" htmlFor="inputDesc">Descrição: *</label>
-                <div className="control">
-                    <textarea className="textarea" 
-                            id="inputDesc"
+            <div className="columns">
+                <div className="field column is-full">
+                    <label className="label" htmlFor="inputDesc">Descrição: *</label>
+                    <div className="control">
+                        <textarea className="textarea" 
+                            id="inputDesc" value = {descricao}
+                            onChange = {event => setDescricao(event.target.value)}
                             placeholder="digite Descrição Produto" />
+                    </div>
                 </div>
             </div>
 
             <div className="field is-grouped">
                 <div className="control">
-                    <button className="button">Salvar</button>
+                    <button onClick = {submit}  className="button">Salvar</button>
                 </div>
 
                 <div className="control">
                     <button className="button">Voltar</button>
                 </div>                
             </div>
-
         </Layout>
     )
 }
